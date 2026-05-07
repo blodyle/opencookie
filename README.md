@@ -162,6 +162,7 @@ You can override this mapping in config.
 ## Recipes
 
 - [Google Analytics](docs/google-analytics.md)
+- [Plausible](docs/plausible.md)
 
 ## What OpenCookie Is Not
 
