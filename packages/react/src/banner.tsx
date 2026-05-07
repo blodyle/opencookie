@@ -13,9 +13,16 @@ export interface OpenCookieBannerProps {
   saveLabel?: string
 }
 
+const defaultTitle = "We value your privacy"
+const defaultDescription =
+  "We use optional cookies to improve the site. You can accept, reject, or customize your choices."
+const preferencesTitle = "Cookie preferences"
+const preferencesDescription =
+  "Choose which optional tools can load. Necessary cookies are always on."
+
 export function OpenCookieBanner({
-  title = "We value your privacy",
-  description = "We use optional cookies to improve the site. You can accept, reject, or customize your choices.",
+  title = defaultTitle,
+  description = defaultDescription,
   acceptLabel = "Accept all",
   rejectLabel = "Reject all",
   customizeLabel = "Customize",
@@ -24,6 +31,14 @@ export function OpenCookieBanner({
   const consent = useOpenCookie()
   const [isCustomizing, setIsCustomizing] = useState(false)
   const [draftChoices, setDraftChoices] = useState<ConsentChoices>(consent.choices)
+  const [focusedCategoryId, setFocusedCategoryId] = useState<string | null>(null)
+  const isPreferencesView = isCustomizing || consent.isSettingsOpen
+  const heading =
+    isPreferencesView && title === defaultTitle ? preferencesTitle : title
+  const body =
+    isPreferencesView && description === defaultDescription
+      ? preferencesDescription
+      : description
 
   useEffect(() => {
     setDraftChoices(consent.choices)
@@ -70,7 +85,7 @@ export function OpenCookieBanner({
           lineHeight: 1.2,
         }}
       >
-        {title}
+        {heading}
       </h2>
       <p
         style={{
@@ -81,29 +96,66 @@ export function OpenCookieBanner({
           lineHeight: 1.45,
         }}
       >
-        {description}
+        {body}
       </p>
 
-      {isCustomizing || consent.isSettingsOpen ? (
+      {isPreferencesView ? (
         <form onSubmit={save}>
+          <div
+            style={{
+              margin: "0 0 10px",
+              color: "#86868b",
+              fontSize: 12,
+              fontWeight: 650,
+              letterSpacing: 0.2,
+              textTransform: "uppercase",
+            }}
+          >
+            Consent categories
+          </div>
           <div style={{ display: "grid", gap: 10, marginBottom: 18 }}>
             {consent.categories.map((category) => (
               <label
                 key={category.id}
                 style={{
                   display: "grid",
+                  position: "relative",
                   gridTemplateColumns: "1fr auto",
                   gap: 14,
                   alignItems: "center",
-                  border: "1px solid rgba(0, 0, 0, 0.06)",
-                  borderRadius: 16,
-                  background: "rgba(247, 247, 248, 0.86)",
-                  padding: "12px 12px 12px 14px",
+                  border: "1px solid rgba(0, 0, 0, 0.045)",
+                  borderRadius: 18,
+                  background: "rgba(247, 247, 248, 0.62)",
+                  padding: "12px 12px 12px 15px",
                   fontSize: 14,
                 }}
               >
                 <span>
-                  <strong style={{ fontWeight: 600 }}>{category.label}</strong>
+                  <span
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 7,
+                      alignItems: "center",
+                    }}
+                  >
+                    <strong style={{ fontWeight: 620 }}>{category.label}</strong>
+                    {category.required ? (
+                      <span
+                        style={{
+                          borderRadius: 999,
+                          background: "rgba(0, 0, 0, 0.055)",
+                          color: "#6e6e73",
+                          padding: "2px 7px",
+                          fontSize: 11,
+                          fontWeight: 620,
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        Always on
+                      </span>
+                    ) : null}
+                  </span>
                   {category.description ? (
                     <span
                       style={{
@@ -123,6 +175,7 @@ export function OpenCookieBanner({
                   style={getSwitchTrackStyle(
                     category.required || draftChoices[category.id] === true,
                     category.required === true,
+                    focusedCategoryId === category.id,
                   )}
                 >
                   <span
@@ -135,6 +188,8 @@ export function OpenCookieBanner({
                   type="checkbox"
                   checked={category.required || draftChoices[category.id] === true}
                   disabled={category.required}
+                  onFocus={() => setFocusedCategoryId(category.id)}
+                  onBlur={() => setFocusedCategoryId(null)}
                   style={{
                     position: "absolute",
                     width: 1,
@@ -156,7 +211,7 @@ export function OpenCookieBanner({
             ))}
           </div>
           <div style={actionRowStyle}>
-            <button type="button" style={secondaryButtonStyle} onClick={consent.rejectAll}>
+            <button type="button" style={ghostButtonStyle} onClick={consent.rejectAll}>
               {rejectLabel}
             </button>
             <button type="button" style={secondaryButtonStyle} onClick={consent.acceptAll}>
@@ -169,7 +224,7 @@ export function OpenCookieBanner({
         </form>
       ) : (
         <div style={actionRowStyle}>
-          <button type="button" style={secondaryButtonStyle} onClick={consent.rejectAll}>
+          <button type="button" style={ghostButtonStyle} onClick={consent.rejectAll}>
             {rejectLabel}
           </button>
           <button
@@ -220,10 +275,20 @@ const secondaryButtonStyle = {
   color: "#1d1d1f",
 } satisfies React.CSSProperties
 
+const ghostButtonStyle = {
+  ...baseButtonStyle,
+  background: "transparent",
+  color: "#424245",
+  paddingInline: 10,
+} satisfies React.CSSProperties
+
 function getSwitchTrackStyle(
   checked: boolean,
   disabled: boolean,
+  focused: boolean,
 ): React.CSSProperties {
+  const checkedBackground = disabled ? "rgba(120, 120, 128, 0.34)" : "#007aff"
+
   return {
     position: "relative",
     display: "inline-flex",
@@ -231,12 +296,12 @@ function getSwitchTrackStyle(
     width: 46,
     height: 28,
     borderRadius: 999,
-    background: checked ? "#007aff" : "rgba(120, 120, 128, 0.22)",
-    boxShadow: checked
-      ? "inset 0 0 0 1px rgba(0, 122, 255, 0.08)"
+    background: checked ? checkedBackground : "rgba(120, 120, 128, 0.22)",
+    boxShadow: focused
+      ? "0 0 0 4px rgba(0, 122, 255, 0.18), inset 0 0 0 1px rgba(0, 122, 255, 0.14)"
       : "inset 0 0 0 1px rgba(0, 0, 0, 0.04)",
-    opacity: disabled ? 0.52 : 1,
-    transition: "background 160ms ease, opacity 160ms ease",
+    cursor: disabled ? "default" : "pointer",
+    transition: "background 160ms ease, box-shadow 160ms ease",
   }
 }
 
