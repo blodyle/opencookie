@@ -50,13 +50,29 @@ p {
   line-height: 1.6;
 }
 
-.settings-button {
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.settings-button,
+.reset-button {
   border: 1px solid #171717;
   border-radius: 6px;
-  background: #171717;
-  color: #fff;
   padding: 10px 14px;
   font: inherit;
+}
+
+.settings-button {
+  background: #171717;
+  color: #fff;
+}
+
+.reset-button {
+  background: transparent;
+  color: #171717;
 }
 
 .blocked,

@@ -1,4 +1,5 @@
 import { OpenCookieGate, OpenCookieSettingsButton } from "@opencookie/react"
+import { ResetConsentButton } from "../components/reset-consent-button"
 
 export default function Page() {
   return (
@@ -10,7 +11,10 @@ export default function Page() {
           The analytics placeholder below only renders after the visitor grants
           analytics consent.
         </p>
-        <OpenCookieSettingsButton className="settings-button" />
+        <div className="actions">
+          <OpenCookieSettingsButton className="settings-button" />
+          <ResetConsentButton />
+        </div>
       </section>
 
       <section className="demo">
