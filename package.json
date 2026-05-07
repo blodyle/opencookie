@@ -13,7 +13,8 @@
     "build": "yarn workspace @opencookie/react build",
     "test": "yarn workspace @opencookie/react test",
     "test:watch": "yarn workspace @opencookie/react test:watch",
-    "typecheck": "yarn workspace @opencookie/react typecheck"
+    "typecheck": "yarn workspace @opencookie/react typecheck",
+    "typecheck:example": "yarn workspace opencookie-next-app-router-example typecheck"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
