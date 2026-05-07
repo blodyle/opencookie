@@ -1,12 +1,36 @@
 {
   "name": "@opencookie/react",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "Tiny, frontend-only consent gating for React and Next.js apps.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
+  "homepage": "https://github.com/blodyle/opencookie#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blodyle/opencookie.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/blodyle/opencookie/issues"
+  },
+  "keywords": [
+    "cookies",
+    "consent",
+    "cookie-consent",
+    "privacy",
+    "google-consent-mode",
+    "react",
+    "nextjs",
+    "gdpr"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

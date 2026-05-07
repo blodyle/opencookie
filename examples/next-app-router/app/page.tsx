@@ -1,4 +1,5 @@
-import { OpenCookieGate, OpenCookieSettingsButton } from "@opencookie/react"
+import { OpenCookieSettingsButton } from "@opencookie/react"
+import { AnalyticsGateDemo } from "../components/analytics-gate-demo"
 import { ResetConsentButton } from "../components/reset-consent-button"
 
 export default function Page() {
@@ -19,17 +20,7 @@ export default function Page() {
 
       <section className="demo">
         <h2>Analytics gate</h2>
-        <OpenCookieGate
-          category="analytics"
-          fallback={<p className="blocked">Analytics is blocked.</p>}
-        >
-          <p className="loaded">Analytics can load now.</p>
-          <script
-            async
-            data-example="analytics"
-            src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"
-          />
-        </OpenCookieGate>
+        <AnalyticsGateDemo />
       </section>
     </main>
   )
