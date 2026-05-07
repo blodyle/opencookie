@@ -1,5 +1,11 @@
 # OpenCookie
 
+[![CI](https://github.com/blodyle/opencookie/actions/workflows/ci.yml/badge.svg)](https://github.com/blodyle/opencookie/actions/workflows/ci.yml)
+[![npm alpha](https://img.shields.io/npm/v/%40opencookie%2Freact/alpha?label=npm%20alpha)](https://www.npmjs.com/package/@opencookie/react)
+[![license](https://img.shields.io/npm/l/%40opencookie%2Freact)](https://github.com/blodyle/opencookie/blob/main/LICENSE)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/%40opencookie%2Freact?label=minzip)](https://bundlephobia.com/package/@opencookie/react)
+[![telemetry](https://img.shields.io/badge/telemetry-none-111111)](https://github.com/blodyle/opencookie#what-opencookie-is-not)
+
 Tiny, frontend-only consent gating for Next.js and React apps.
 
 OpenCookie helps developers block analytics, pixels, widgets, and other optional components until the user gives consent. It has no backend, no dashboard, no telemetry, and no hosted API.
