@@ -159,6 +159,10 @@ Default mapping:
 
 You can override this mapping in config.
 
+## Recipes
+
+- [Google Analytics](docs/google-analytics.md)
+
 ## What OpenCookie Is Not
 
 OpenCookie is not a full consent management platform. It does not include a backend, hosted dashboard, user accounts, remote config, cookie scanner, vendor scanner, IAB TCF, audit logs, cross-device sync, or legal compliance guarantees.
