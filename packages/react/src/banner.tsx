@@ -24,11 +24,12 @@ export function OpenCookieBanner({
   title = defaultTitle,
   description = defaultDescription,
   acceptLabel = "Accept all",
-  rejectLabel = "Reject all",
+  rejectLabel = "Reject optional",
   customizeLabel = "Customize",
   saveLabel = "Save choices",
 }: OpenCookieBannerProps) {
   const consent = useOpenCookie()
+  const isMobile = useMediaQuery("(max-width: 520px)")
   const [isCustomizing, setIsCustomizing] = useState(false)
   const [draftChoices, setDraftChoices] = useState<ConsentChoices>(consent.choices)
   const [focusedCategoryId, setFocusedCategoryId] = useState<string | null>(null)
@@ -55,46 +56,15 @@ export function OpenCookieBanner({
   return (
     <section
       aria-label="Cookie consent"
-      style={{
-        position: "fixed",
-        right: 20,
-        bottom: 20,
-        left: 20,
-        zIndex: 2147483647,
-        width: "min(100% - 40px, 460px)",
-        marginLeft: "auto",
-        border: "1px solid rgba(0, 0, 0, 0.08)",
-        borderRadius: 24,
-        background: "rgba(255, 255, 255, 0.92)",
-        color: "#1d1d1f",
-        boxShadow:
-          "0 24px 70px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06)",
-        padding: 20,
-        fontFamily:
-          "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
-        backdropFilter: "saturate(180%) blur(22px)",
-        WebkitBackdropFilter: "saturate(180%) blur(22px)",
-      }}
+      style={getPanelStyle(isMobile)}
     >
       <h2
-        style={{
-          margin: "0 0 8px",
-          fontSize: 19,
-          fontWeight: 650,
-          letterSpacing: 0,
-          lineHeight: 1.2,
-        }}
+        style={getHeadingStyle(isMobile)}
       >
         {heading}
       </h2>
       <p
-        style={{
-          margin: "0 0 18px",
-          color: "#55555a",
-          fontSize: 14,
-          letterSpacing: 0,
-          lineHeight: 1.45,
-        }}
+        style={getDescriptionStyle(isMobile)}
       >
         {body}
       </p>
@@ -210,31 +180,47 @@ export function OpenCookieBanner({
               </label>
             ))}
           </div>
-          <div style={actionRowStyle}>
-            <button type="button" style={ghostButtonStyle} onClick={consent.rejectAll}>
+          <div style={getActionRowStyle(isMobile)}>
+            <button
+              type="button"
+              style={getGhostButtonStyle(isMobile)}
+              onClick={consent.rejectAll}
+            >
               {rejectLabel}
             </button>
-            <button type="button" style={secondaryButtonStyle} onClick={consent.acceptAll}>
+            <button
+              type="button"
+              style={getSecondaryButtonStyle(isMobile)}
+              onClick={consent.acceptAll}
+            >
               {acceptLabel}
             </button>
-            <button type="submit" style={primaryButtonStyle}>
+            <button type="submit" style={getPrimaryButtonStyle(isMobile)}>
               {saveLabel}
             </button>
           </div>
         </form>
       ) : (
-        <div style={actionRowStyle}>
-          <button type="button" style={ghostButtonStyle} onClick={consent.rejectAll}>
-            {rejectLabel}
-          </button>
+        <div style={getActionRowStyle(isMobile)}>
           <button
             type="button"
-            style={secondaryButtonStyle}
+            style={getSecondaryButtonStyle(isMobile, 2)}
             onClick={() => setIsCustomizing(true)}
           >
             {customizeLabel}
           </button>
-          <button type="button" style={primaryButtonStyle} onClick={consent.acceptAll}>
+          <button
+            type="button"
+            style={getGhostButtonStyle(isMobile, 1)}
+            onClick={consent.rejectAll}
+          >
+            {rejectLabel}
+          </button>
+          <button
+            type="button"
+            style={getPrimaryButtonStyle(isMobile, 3)}
+            onClick={consent.acceptAll}
+          >
             {acceptLabel}
           </button>
         </div>
@@ -243,12 +229,86 @@ export function OpenCookieBanner({
   )
 }
 
-const actionRowStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "flex-end",
-  gap: 8,
-} satisfies React.CSSProperties
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    if (typeof window.matchMedia !== "function") return
+
+    const media = window.matchMedia(query)
+    setMatches(media.matches)
+
+    function update() {
+      setMatches(media.matches)
+    }
+
+    media.addEventListener("change", update)
+
+    return () => media.removeEventListener("change", update)
+  }, [query])
+
+  return matches
+}
+
+function getPanelStyle(isMobile: boolean): React.CSSProperties {
+  return {
+    position: "fixed",
+    right: isMobile ? 0 : 20,
+    bottom: 0,
+    left: isMobile ? 0 : 20,
+    zIndex: 2147483647,
+    width: isMobile ? "100%" : "min(100% - 40px, 460px)",
+    maxHeight: isMobile ? "92dvh" : undefined,
+    overflowY: isMobile ? "auto" : undefined,
+    marginLeft: isMobile ? undefined : "auto",
+    border: "1px solid rgba(0, 0, 0, 0.08)",
+    borderBottom: isMobile ? 0 : "1px solid rgba(0, 0, 0, 0.08)",
+    borderRadius: isMobile ? "28px 28px 0 0" : 24,
+    background: "rgba(255, 255, 255, 0.94)",
+    color: "#1d1d1f",
+    boxShadow: isMobile
+      ? "0 -18px 55px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(0, 0, 0, 0.04)"
+      : "0 24px 70px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06)",
+    padding: isMobile
+      ? "22px 20px calc(20px + env(safe-area-inset-bottom))"
+      : 20,
+    fontFamily:
+      "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+    backdropFilter: "saturate(180%) blur(22px)",
+    WebkitBackdropFilter: "saturate(180%) blur(22px)",
+  }
+}
+
+function getHeadingStyle(isMobile: boolean): React.CSSProperties {
+  return {
+    margin: "0 0 8px",
+    fontSize: isMobile ? 22 : 19,
+    fontWeight: 650,
+    letterSpacing: 0,
+    lineHeight: 1.18,
+  }
+}
+
+function getDescriptionStyle(isMobile: boolean): React.CSSProperties {
+  return {
+    margin: isMobile ? "0 0 20px" : "0 0 18px",
+    color: "#55555a",
+    fontSize: isMobile ? 15 : 14,
+    letterSpacing: 0,
+    lineHeight: 1.45,
+  }
+}
+
+function getActionRowStyle(isMobile: boolean): React.CSSProperties {
+  return {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    flexWrap: isMobile ? "nowrap" : "wrap",
+    justifyContent: "flex-end",
+    gap: isMobile ? 10 : 8,
+  }
+}
 
 const baseButtonStyle = {
   minHeight: 38,
@@ -262,25 +322,52 @@ const baseButtonStyle = {
   cursor: "pointer",
 } satisfies React.CSSProperties
 
-const primaryButtonStyle = {
-  ...baseButtonStyle,
-  background: "#007aff",
-  color: "#fff",
-  boxShadow: "0 1px 2px rgba(0, 122, 255, 0.24)",
-} satisfies React.CSSProperties
+function getBaseButtonStyle(isMobile: boolean): React.CSSProperties {
+  return {
+    ...baseButtonStyle,
+    width: isMobile ? "100%" : undefined,
+    minHeight: isMobile ? 50 : baseButtonStyle.minHeight,
+    fontSize: isMobile ? 15 : baseButtonStyle.fontSize,
+  }
+}
 
-const secondaryButtonStyle = {
-  ...baseButtonStyle,
-  background: "rgba(0, 0, 0, 0.06)",
-  color: "#1d1d1f",
-} satisfies React.CSSProperties
+function getPrimaryButtonStyle(
+  isMobile: boolean,
+  order?: number,
+): React.CSSProperties {
+  return {
+    ...getBaseButtonStyle(isMobile),
+    order,
+    background: "#007aff",
+    color: "#fff",
+    boxShadow: "0 1px 2px rgba(0, 122, 255, 0.24)",
+  }
+}
 
-const ghostButtonStyle = {
-  ...baseButtonStyle,
-  background: "transparent",
-  color: "#424245",
-  paddingInline: 10,
-} satisfies React.CSSProperties
+function getSecondaryButtonStyle(
+  isMobile: boolean,
+  order?: number,
+): React.CSSProperties {
+  return {
+    ...getBaseButtonStyle(isMobile),
+    order,
+    background: "rgba(0, 0, 0, 0.06)",
+    color: "#1d1d1f",
+  }
+}
+
+function getGhostButtonStyle(
+  isMobile: boolean,
+  order?: number,
+): React.CSSProperties {
+  return {
+    ...getBaseButtonStyle(isMobile),
+    order,
+    background: "transparent",
+    color: "#424245",
+    paddingInline: isMobile ? 15 : 10,
+  }
+}
 
 function getSwitchTrackStyle(
   checked: boolean,
