@@ -12,6 +12,8 @@ OpenCookie helps developers block analytics, pixels, widgets, and other optional
 
 OpenCookie helps implement consent-gated loading. It does not provide legal advice or guarantee compliance.
 
+Try the live demo: [blodyle.github.io/opencookie](https://blodyle.github.io/opencookie/)
+
 ## Install
 
 ```bash
