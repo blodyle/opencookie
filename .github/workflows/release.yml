@@ -67,10 +67,16 @@ jobs:
           NAME="$(node -p "require('./packages/react/package.json').name")"
           VERSION="$(node -p "require('./packages/react/package.json').version")"
           TAG="${NAME}@${VERSION}"
+          PRERELEASE="false"
+
+          case "$VERSION" in
+            *-*) PRERELEASE="true" ;;
+          esac
 
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "prerelease=${PRERELEASE}" >> "$GITHUB_OUTPUT"
 
       - name: Validate package metadata
         shell: bash
@@ -127,9 +133,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          RELEASE_FLAGS=()
+
+          if [ "${{ steps.package.outputs.prerelease }}" = "true" ]; then
+            RELEASE_FLAGS+=(--prerelease)
+          fi
+
           gh release create "${{ steps.package.outputs.tag }}" \
             --title "${{ steps.package.outputs.tag }}" \
-            --generate-notes
+            --generate-notes \
+            "${RELEASE_FLAGS[@]}"
 
   deploy-demo:
     name: Deploy demo
