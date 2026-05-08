@@ -21,7 +21,7 @@ export function App() {
       <OpenCookieGate category="analytics">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX" />
       </OpenCookieGate>
-      <OpenCookieBanner />
+      <OpenCookieBanner tone="playful" />
     </OpenCookieProvider>
   )
 }

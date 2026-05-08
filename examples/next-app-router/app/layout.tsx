@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <OpenCookieProvider config={openCookieConfig}>
           {children}
-          <OpenCookieBanner />
+          <OpenCookieBanner tone="playful" />
         </OpenCookieProvider>
       </body>
     </html>
