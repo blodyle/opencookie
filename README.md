@@ -117,6 +117,12 @@ export function Analytics() {
 </OpenCookieGate>
 ```
 
+The default banner can stay calm or use a lighter tone:
+
+```tsx
+<OpenCookieBanner tone="playful" />
+```
+
 ## Bring Your Own UI
 
 The default banner is optional. Build your own UI with `useOpenCookie`:
