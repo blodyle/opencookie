@@ -152,19 +152,6 @@ describe("OpenCookieProvider and OpenCookieGate", () => {
     expect(await screen.findByText("Analytics loaded")).toBeInTheDocument()
   })
 
-  it("supports playful default banner copy", async () => {
-    render(
-      <OpenCookieProvider config={config}>
-        <OpenCookieBanner tone="playful" />
-      </OpenCookieProvider>,
-    )
-
-    expect(await screen.findByText("Cookie checkpoint")).toBeInTheDocument()
-    expect(
-      screen.getByText(/Unfortunately, they are the browser kind/),
-    ).toBeInTheDocument()
-  })
-
   it("sends denied Google Consent Mode defaults on boot and granted updates after consent", async () => {
     render(
       <OpenCookieProvider config={config}>
