@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -23,7 +26,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
