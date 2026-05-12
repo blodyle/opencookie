@@ -2,6 +2,13 @@
 
 All notable changes to OpenCookie will be documented in this file.
 
+## 0.1.0
+
+- Released the first stable OpenCookie package for default installs.
+- Added the playful `OpenCookieBanner` tone and cookie icon.
+- Refactored banner internals into smaller tested modules.
+- Hardened GitHub workflows by removing shared dependency caches from release paths and scoping permissions.
+
 ## 0.1.0-alpha.1
 
 - Improved the default banner on mobile with a bottom-sheet layout and larger actions.
