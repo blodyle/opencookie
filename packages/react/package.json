@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "description": "Tiny, frontend-only consent gating for React and Next.js apps.",
   "license": "MIT",
+  "author": {
+    "name": "Guidelamego",
+    "url": "https://guidelamego.com"
+  },
   "type": "module",
   "sideEffects": false,
   "homepage": "https://github.com/blodyle/opencookie#readme",
@@ -17,12 +21,16 @@
   "keywords": [
     "cookies",
     "consent",
+    "consent-gate",
+    "cookie-banner",
     "cookie-consent",
-    "privacy",
+    "analytics-consent",
     "google-consent-mode",
+    "privacy",
     "react",
+    "next",
     "nextjs",
-    "gdpr"
+    "typescript"
   ],
   "publishConfig": {
     "access": "public"

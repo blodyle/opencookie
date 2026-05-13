@@ -4,6 +4,10 @@
   "version": "0.1.1",
   "description": "Tiny, frontend-only consent gating for Next.js and React apps.",
   "license": "MIT",
+  "author": {
+    "name": "Guidelamego",
+    "url": "https://guidelamego.com"
+  },
   "packageManager": "yarn@1.22.22",
   "workspaces": [
     "packages/*",

@@ -29,4 +29,13 @@ export function App() {
 
 OpenCookie helps implement consent-gated loading. It does not provide legal advice or guarantee compliance.
 
-Full docs: https://github.com/blodyle/opencookie
+Recipes:
+
+- [Custom banner with `useOpenCookie`](https://github.com/blodyle/opencookie/blob/main/docs/custom-banner.md)
+- [Settings link in a footer](https://github.com/blodyle/opencookie/blob/main/docs/settings-link.md)
+- [Google Analytics](https://github.com/blodyle/opencookie/blob/main/docs/google-analytics.md)
+- [Plausible](https://github.com/blodyle/opencookie/blob/main/docs/plausible.md)
+
+Full docs: [github.com/blodyle/opencookie](https://github.com/blodyle/opencookie)
+
+Made by [Guidelamego](https://guidelamego.com).
