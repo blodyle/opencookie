@@ -64,8 +64,9 @@ export function getActionRowStyle(isMobile: boolean): CSSProperties {
   return {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
-    flexWrap: isMobile ? "nowrap" : "wrap",
+    flexWrap: "nowrap",
     justifyContent: "flex-end",
+    alignItems: "center",
     gap: isMobile ? 10 : 8,
   };
 }
@@ -85,9 +86,11 @@ const baseButtonStyle = {
 function getBaseButtonStyle(isMobile: boolean): CSSProperties {
   return {
     ...baseButtonStyle,
+    flexShrink: 0,
     width: isMobile ? "100%" : undefined,
     minHeight: isMobile ? 50 : baseButtonStyle.minHeight,
     fontSize: isMobile ? 15 : baseButtonStyle.fontSize,
+    whiteSpace: "nowrap",
   };
 }
 
