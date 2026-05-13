@@ -2,6 +2,11 @@
 
 All notable changes to OpenCookie will be documented in this file.
 
+## 0.1.1
+
+- Fixed the README npm badge to show the default published version.
+- Fixed desktop banner actions so localized labels stay on one row.
+
 ## 0.1.0
 
 - Released the first stable OpenCookie package for default installs.

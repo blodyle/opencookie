@@ -1,6 +1,6 @@
 {
   "name": "@opencookie/react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny, frontend-only consent gating for React and Next.js apps.",
   "license": "MIT",
   "type": "module",
