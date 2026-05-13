@@ -21,3 +21,7 @@ Core rules:
 Simplicity is a product feature. Do not expand OpenCookie into a consent management platform.
 
 Tests should protect behavior contracts: consent storage, version invalidation, required categories, gate rendering, and Google Consent Mode updates.
+
+Project-specific skills:
+
+- Use `.codex/skills/opencookie-release` when preparing package releases.

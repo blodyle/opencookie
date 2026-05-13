@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenCookie Release"
+  short_description: "Prepare OpenCookie manual releases"
+  default_prompt: "Use $opencookie-release to prepare the next OpenCookie release."
