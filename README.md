@@ -125,7 +125,7 @@ The default banner can stay calm or use a lighter tone:
 
 ## Bring Your Own UI
 
-The default banner is optional. Build your own UI with `useOpenCookie`:
+The default banner is optional. Build your own UI with `useOpenCookie`, or start with the [custom banner recipe](docs/custom-banner.md):
 
 ```tsx
 "use client"
@@ -169,9 +169,13 @@ You can override this mapping in config.
 
 ## Recipes
 
+- [Custom banner with `useOpenCookie`](docs/custom-banner.md)
+- [Settings link in a footer](docs/settings-link.md)
 - [Google Analytics](docs/google-analytics.md)
 - [Plausible](docs/plausible.md)
 
 ## What OpenCookie Is Not
 
 OpenCookie is not a full consent management platform. It does not include a backend, hosted dashboard, user accounts, remote config, cookie scanner, vendor scanner, IAB TCF, audit logs, cross-device sync, or legal compliance guarantees.
+
+Made by [Guidelamego](https://guidelamego.com).
