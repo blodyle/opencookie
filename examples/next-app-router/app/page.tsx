@@ -1,5 +1,6 @@
 import { OpenCookieSettingsButton } from "@opencookie/react"
 import { AnalyticsGateDemo } from "../components/analytics-gate-demo"
+import { BannerDemoControls } from "../components/banner-demo-controls"
 import { ResetConsentButton } from "../components/reset-consent-button"
 
 export default function Page() {
@@ -16,6 +17,7 @@ export default function Page() {
           <OpenCookieSettingsButton className="settings-button" />
           <ResetConsentButton />
         </div>
+        <BannerDemoControls />
       </section>
 
       <section className="demo">

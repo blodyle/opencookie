@@ -6,6 +6,7 @@ import type {
 } from "react";
 import {
   getActionRowStyle,
+  getBackdropStyle,
   getDescriptionStyle,
   getGhostButtonStyle,
   getHeaderStyle,
@@ -14,9 +15,11 @@ import {
   getPrimaryButtonStyle,
   getSecondaryButtonStyle,
 } from "./banner-styles";
+import type { OpenCookieBannerLayout } from "./banner-types";
 
 interface BannerPanelProps {
   isMobile: boolean;
+  layout: OpenCookieBannerLayout;
   children: ReactNode;
 }
 
@@ -24,11 +27,22 @@ export function BannerPanel(props: BannerPanelProps) {
   return (
     <section
       aria-label="Cookie consent"
-      style={getPanelStyle(props.isMobile)}
+      role={props.layout === "dialog" ? "dialog" : undefined}
+      style={getPanelStyle(props.isMobile, props.layout)}
     >
       {props.children}
     </section>
   );
+}
+
+interface BannerBackdropProps {
+  layout: OpenCookieBannerLayout;
+}
+
+export function BannerBackdrop(props: BannerBackdropProps) {
+  if (props.layout !== "dialog") return null;
+
+  return <div aria-hidden="true" style={getBackdropStyle()} />;
 }
 
 interface BannerHeaderProps {

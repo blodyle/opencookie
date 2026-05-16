@@ -57,6 +57,87 @@ p {
   margin-top: 24px;
 }
 
+.demo-controls {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+  margin-top: 24px;
+}
+
+.switch-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  padding: 14px 16px;
+}
+
+.switch-field strong,
+.switch-field small {
+  display: block;
+}
+
+.switch-field strong {
+  font-size: 15px;
+}
+
+.switch-field small {
+  margin-top: 4px;
+  color: #616161;
+  font-size: 13px;
+}
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.switch input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.switch-track {
+  display: inline-flex;
+  align-items: center;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  background: #d4d4d4;
+  padding: 3px;
+  transition: background 160ms ease;
+}
+
+.switch-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transform: translateX(0);
+  transition: transform 160ms ease;
+}
+
+.switch input:checked + .switch-track {
+  background: #171717;
+}
+
+.switch input:checked + .switch-track .switch-thumb {
+  transform: translateX(20px);
+}
+
+.switch input:focus-visible + .switch-track {
+  outline: 3px solid rgba(0, 122, 255, 0.34);
+  outline-offset: 3px;
+}
+
 .settings-button,
 .reset-button {
   border: 1px solid #171717;

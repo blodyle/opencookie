@@ -107,6 +107,23 @@ describe("OpenCookieBanner", () => {
     })
   })
 
+  it("can render as a more prominent dialog layout", async () => {
+    renderBanner(<OpenCookieBanner layout="dialog" />)
+
+    const dialog = await screen.findByRole("dialog", {
+      name: "Cookie consent",
+    })
+
+    expect(dialog).toHaveStyle({
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+    })
+    expect(screen.getByRole("button", { name: "Accept all" }))
+      .toBeInTheDocument()
+  })
+
   it("always keeps required categories enabled when saving customized choices", async () => {
     renderBanner(<OpenCookieBanner />)
 

@@ -2,6 +2,12 @@
 
 All notable changes to OpenCookie will be documented in this file.
 
+## 0.2.0
+
+- Added `OpenCookieBanner layout="dialog"` for a more prominent centered desktop dialog with a darker backdrop.
+- Kept the current banner layout as the default.
+- Added example app controls for switching between banner/dialog layouts and default/playful tones.
+
 ## 0.1.1
 
 - Fixed the README npm badge to show the default published version.

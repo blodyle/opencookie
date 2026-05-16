@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { OpenCookieBanner, OpenCookieProvider } from "@opencookie/react"
+import { OpenCookieProvider } from "@opencookie/react"
 import { openCookieConfig } from "../open-cookie.config"
 import "./styles.css"
 
@@ -18,7 +18,6 @@ export default function RootLayout({
       <body>
         <OpenCookieProvider config={openCookieConfig}>
           {children}
-          <OpenCookieBanner tone="playful" />
         </OpenCookieProvider>
       </body>
     </html>
