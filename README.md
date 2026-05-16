@@ -123,6 +123,12 @@ The default banner can stay calm or use a lighter tone:
 <OpenCookieBanner tone="playful" />
 ```
 
+For a more prominent first choice, render the same default UI as a dialog with a darker backdrop:
+
+```tsx
+<OpenCookieBanner layout="dialog" />
+```
+
 ## Bring Your Own UI
 
 The default banner is optional. Build your own UI with `useOpenCookie`, or start with the [custom banner recipe](docs/custom-banner.md):

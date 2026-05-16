@@ -1,16 +1,33 @@
 import type { CSSProperties } from "react";
+import type { OpenCookieBannerLayout } from "./banner-types";
 
-export function getPanelStyle(isMobile: boolean): CSSProperties {
+export function getBackdropStyle(): CSSProperties {
   return {
     position: "fixed",
-    right: isMobile ? 0 : 20,
-    bottom: isMobile ? 0 : 20,
-    left: isMobile ? 0 : 20,
+    inset: 0,
+    zIndex: 2147483646,
+    background: "rgba(0, 0, 0, 0.48)",
+  };
+}
+
+export function getPanelStyle(
+  isMobile: boolean,
+  layout: OpenCookieBannerLayout,
+): CSSProperties {
+  const isDialog = layout === "dialog";
+
+  return {
+    position: "fixed",
+    right: isMobile || !isDialog ? 0 : undefined,
+    bottom: isMobile || !isDialog ? 0 : undefined,
+    left: isMobile || !isDialog ? 0 : "50%",
+    top: !isMobile && isDialog ? "50%" : undefined,
     zIndex: 2147483647,
-    width: isMobile ? "100%" : "min(100% - 40px, 460px)",
-    maxHeight: isMobile ? "92dvh" : undefined,
-    overflowY: isMobile ? "auto" : undefined,
-    marginLeft: isMobile ? undefined : "auto",
+    width: isMobile ? "100%" : `min(100% - 40px, ${isDialog ? 520 : 460}px)`,
+    maxHeight: isMobile ? "92dvh" : isDialog ? "min(92dvh, 620px)" : undefined,
+    overflowY: isMobile || isDialog ? "auto" : undefined,
+    marginLeft: isMobile || isDialog ? undefined : "auto",
+    transform: !isMobile && isDialog ? "translate(-50%, -50%)" : undefined,
     border: "1px solid rgba(0, 0, 0, 0.08)",
     borderBottom: isMobile ? 0 : "1px solid rgba(0, 0, 0, 0.08)",
     borderRadius: isMobile ? "28px 28px 0 0" : 24,

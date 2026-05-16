@@ -27,6 +27,8 @@ export function App() {
 }
 ```
 
+Use `<OpenCookieBanner layout="dialog" />` for a more prominent dialog with a darker backdrop.
+
 OpenCookie helps implement consent-gated loading. It does not provide legal advice or guarantee compliance.
 
 Recipes:

@@ -23,6 +23,7 @@ export { OpenCookieBanner } from "./banner"
 export { OpenCookieGate } from "./gate"
 export { OpenCookieProvider, useOpenCookie } from "./provider"
 export { OpenCookieSettingsButton } from "./settings-button"
+export type { OpenCookieBannerLayout } from "./banner-types"
 export type {
   ConsentCategoryId,
   ConsentChoices,
